@@ -1,0 +1,9 @@
+.container-message {
+    background: #c43;
+    width: 100%;
+    padding: 7px;
+    border-radius: 4px;
+}
+.message {
+    color: azure;
+}

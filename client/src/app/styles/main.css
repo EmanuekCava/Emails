@@ -1,0 +1,153 @@
+:root {
+    --color-header: #34c;
+}
+
+.container-main {
+    margin-top: 72px;
+    height: calc(100vh - 72px);
+    width: 100%;
+    padding: 45px 23px;
+    display: inline-flex;
+    border-radius: 4px;
+}
+
+/* MAILS */
+
+.container-mails {
+    width: 76%;
+    overflow-y: auto;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    border: 1px solid var(--color-header);
+    border-left: none;
+    padding: 7px;
+}
+.container-mail {
+    background: #fff;
+    width: 100%;
+    padding: 2px 7px;
+    word-wrap: break-word;
+    cursor: pointer;
+    border-bottom: 1px solid #aac;
+}
+.container-mail:hover {
+    background: #ddd;
+}
+.container-mail:active {
+    background: #fff;
+}
+.container-main-mail {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+.email-email {
+    font-size: 18px;
+    font-weight: bold;
+}
+.subject-email {
+    font-size: 18px;
+    margin-left: 20px;
+}
+.description-email {
+    font-size: 16px;
+    color: #565;
+}
+
+/* ACTIONS */
+
+.container-actions {
+    width: 24%;
+    padding: 11px;
+    border: 1px solid var(--color-header);
+    border-right: none;
+}
+.contain-action {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    background: #fff;
+    margin-top: 3px;
+    padding: 7px;
+    border-bottom: 2px solid #ddd;
+    cursor: pointer;
+}
+.contain-action:hover {
+    background: #ddd;
+}
+.contain-action:active {
+    background: #fff;
+}
+.icon-action {
+    font-size: 32px;
+    color: var(--color-header);
+}
+.text-action {
+    margin-left: 6px;
+    font-size: 17px;
+}
+
+/* GET MAIL */
+
+.container-getmail {
+    padding: 9px;
+    border: 1px solid var(--color-header);
+    width: 100%;
+    overflow-y: auto;
+    height: 100%;
+    border-radius: 10px;
+    word-wrap: break-word;
+}
+.container-info-getemail {
+    text-align: right;
+}
+.contain-header-getemail {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.subject-getemail {
+    font-size: 22px;
+}
+
+.description-getemail {
+    font-size: 18px;
+    margin-top: 16px;
+}
+
+.trash-icon {
+    color: #c43;
+    font-size: 27px;
+    cursor: pointer;
+}
+.trash-icon:hover {
+    color: #f33;
+}
+.trash-icon:active {
+    color: #c43;
+}
+
+/* CREATE */
+
+.container-create {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.textarea-form {
+    resize: none;
+    width: 100%;
+    height: 182px;
+    padding: 7px;
+    outline: none;
+    font-size: 22px;
+    border-radius: 15px;
+    border: 1px solid;
+    border-color: var(--color-header);
+}
