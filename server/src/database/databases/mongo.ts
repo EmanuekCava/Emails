@@ -1,10 +1,10 @@
 import mongoose from 'mongoose'
 
-const { HOST, DATABASE } = process.env;
+import { mongo_uri } from '../../config/config';
 
 (async () => {
 
-    const connection = await mongoose.connect(`mongodb://${HOST}/${DATABASE}`)
+    const connection = await mongoose.connect(`${mongo_uri}`)
 
     if(connection) {
         console.log("MongoDB is running");

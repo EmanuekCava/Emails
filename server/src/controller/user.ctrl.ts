@@ -6,8 +6,7 @@ import { encryptPassword } from '../helper/encrypt'
 import User from '../database/model/user'
 
 import { IUser } from "interface/User";
-
-const { JWT } = process.env
+import { jwtKey } from "../config/config";
 
 export const users = async (req: Request, res: Response): Promise<Response> => {
 
@@ -44,7 +43,7 @@ export const register = async (req: Request, res: Response): Promise<Response> =
             password: pass
         })
 
-        const token = jwt.sign({ id: newUser._id }, `${JWT}`, {
+        const token = jwt.sign({ id: newUser._id }, `${jwtKey}`, {
             expiresIn: '7d'
         })
 
@@ -69,7 +68,7 @@ export const login = async (req: Request, res: Response): Promise<Response> => {
 
         const user = await User.findOne({ email })
 
-        const token = jwt.sign({ id: user!._id }, `${JWT}`, {
+        const token = jwt.sign({ id: user!._id }, `${jwtKey}`, {
             expiresIn: '7d'
         })
 

@@ -1,15 +1,15 @@
-import React, { useEffect, useContext, useState } from 'react'
+import { useEffect, useContext, useState } from 'react'
 
 import Actions from '../components/main/actions'
 import Mails from '../components/main/mails'
 
 import { EmailContext } from '../server/actions/email.actions'
+import { UserContext } from '../server/actions/user.actions'
 
-import { authProps } from '../types/auth.props'
-
-const Main = ({ setIsIndex }: authProps) => {
+const Main = () => {
 
   const { emailsObtained, emailsSent, messagesObtained, messagesSent } = useContext(EmailContext)
+  const { isLoggedIn } = useContext(UserContext)
 
   const [isEmailReceived, setIsEmailReceived] = useState(true)
   const [isNewEmail, setIsNewEmail] = useState(false)
@@ -17,11 +17,11 @@ const Main = ({ setIsIndex }: authProps) => {
   const [isGetEmail, setIsGetEmail] = useState(false)
 
   useEffect(() => {
-    setIsIndex(true)
-    emailsObtained()
-    emailsSent()
-  }, [])
-
+    if(isLoggedIn) {
+      emailsObtained()
+      emailsSent()
+    }
+  }, [isLoggedIn])
 
   return (
     <div className='container-main'>

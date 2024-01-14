@@ -7,12 +7,10 @@ import { initialUser } from "../values/user.value"
 
 const userReducer = (state: initialStateUser = initialUser, action: action) => {
 
-    var value = "true"
-
     switch (action.type) {
         case AUTH:
-            localStorage.setItem("auth-data", action.payload.token)
-            localStorage.setItem("is-auth-data", JSON.parse(value))
+            localStorage.setItem("is-auth-data", JSON.stringify("true"))
+            localStorage.setItem("user", JSON.stringify(action.payload))
             return {
                 ...state,
                 user: action.payload,
@@ -20,8 +18,8 @@ const userReducer = (state: initialStateUser = initialUser, action: action) => {
             }
 
         case LOGOUT:
-            localStorage.removeItem("auth-data")
-            localStorage.removeItem("is-auth-data")
+            localStorage.setItem("is-auth-data", JSON.stringify("false"))
+            localStorage.removeItem("user")
             return {
                 ...state,
                 user: {},

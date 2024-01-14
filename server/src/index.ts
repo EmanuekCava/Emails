@@ -10,7 +10,9 @@ import './database/databases/mongo'
 import userRoute from './routes/user.routes'
 import messageRoute from './routes/message.routes'
 
-app.set("port", process.env.PORT)
+import { port } from './config/config';
+
+app.set("port", port)
 
 app.use(morgan('dev'))
 app.use(cors())

@@ -1,32 +1,26 @@
-import React, { useEffect, useContext } from 'react'
-import { Navigate } from 'react-router-dom'
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 import FormLogin from '../components/auth/formLogin'
-import { UserContext } from '../server/actions/user.actions'
 
-import { authProps } from '../types/auth.props'
+import { isStorage } from '../helper/storage'
 
-const Login = ({ setIsIndex }: authProps) => {
+const Login = () => {
 
-  const { isLoggedIn } = useContext(UserContext)
+  const navigate = useNavigate()
 
   useEffect(() => {
-    setIsIndex(false)
+    (() => {
+      if (isStorage()) {
+        navigate('/main')
+      }
+    })()
   }, [])
 
-
   return (
-    <>
-      {
-        isLoggedIn || localStorage.getItem("is-auth-data") ? (
-          <Navigate to='/main' />
-        ) : (
-          <div className='container-auth'>
-            <FormLogin />
-          </div>
-        )
-      }
-    </>
+    <div className='container-auth'>
+      <FormLogin />
+    </div>
   )
 }
 

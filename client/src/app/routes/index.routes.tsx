@@ -1,17 +1,23 @@
 import React, { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 import First from '../components/index/first'
 import Second from '../components/index/second'
 
-import { authProps } from '../types/auth.props'
+import { isStorage } from '../helper/storage'
 
-const Index = ({ setIsIndex }: authProps) => {
+const Index = () => {
+
+  const navigate = useNavigate()
 
   useEffect(() => {
-    setIsIndex(true)
+    (() => {
+      if(isStorage()) {
+        navigate('/main')
+      }
+    })()
   }, [])
   
-
   return (
     <div className='container-index'>
       <First />

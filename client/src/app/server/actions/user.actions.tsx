@@ -1,4 +1,4 @@
-import React, { createContext, useReducer } from 'react'
+import React, { createContext, useEffect, useReducer } from 'react'
 import { useNavigate } from "react-router-dom";
 
 import { initialResponse } from '../values/response.value';
@@ -9,6 +9,7 @@ import * as userApi from '../api/user.api'
 import { AUTH, LOGOUT } from '../constants/user.const'
 import userReducer from '../reducers/user.reducer'
 import { initialUser } from '../values/user.value'
+import { isStorage } from '../../helper/storage';
 
 export const UserContext = createContext(initialUser)
 export const ResponseContext = createContext(initialResponse)
@@ -19,6 +20,17 @@ export const UserContextGlobal = ({ children }: any) => {
 
     const [state, dispatch] = useReducer(userReducer, initialUser)
     const [stateR, dispatchR] = useReducer(responseReducer, initialResponse)
+
+    useEffect(() => {
+
+        if(isStorage()) {
+            dispatch({
+                type: AUTH,
+                payload: JSON.parse(localStorage.getItem("user") as string)
+            })
+        }
+        
+    }, [])
 
     const login = async (userData: any) => {
 

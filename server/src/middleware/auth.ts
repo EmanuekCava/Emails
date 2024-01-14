@@ -5,7 +5,7 @@ import User from '../database/model/user'
 
 import { IValidation } from 'interface/Validation'
 
-const { JWT } = process.env
+import { jwtKey } from '../config/config'
 
 const auth = async (req: Request, res: Response, next: NextFunction) => {
 
@@ -15,7 +15,7 @@ const auth = async (req: Request, res: Response, next: NextFunction) => {
         return res.status(500).json({ message: "Token does not exists" })
     }
 
-    const validation = jwt.verify(token, `${JWT}`) as IValidation
+    const validation = jwt.verify(token, `${jwtKey}`) as IValidation
 
     if (!validation) {
         return res.status(500).json({ message: "Token is not valid" })
