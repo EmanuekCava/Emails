@@ -1,10 +1,11 @@
 import { ERROR_CREATE, ERROR_LOGIN, ERROR_REGISTER } from "../constants/response.const";
 
-import { action } from "../../types/reducer.props"
-import { initialStateResponse } from "../../types/response.props";
+import { IAction } from "../../interface/Reducer";
+import { IReducerResponse } from "../../interface/Response";
+
 import { initialResponse } from "../values/response.value";
 
-const responseReducer = (state: initialStateResponse = initialResponse, action: action) => {
+const responseReducer = (state: IReducerResponse = initialResponse, action: IAction): IReducerResponse | any => {
     switch (action.type) {
         case ERROR_LOGIN:
             return {

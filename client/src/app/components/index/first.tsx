@@ -1,5 +1,3 @@
-import React from 'react'
-
 import ImageFirst from './components/imageFirst'
 import TextFirst from './components/textFirst'
 

@@ -1,12 +1,14 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 
 import { ResponseContext } from '../../server/actions/email.actions'
 
 import Error from '../component/error'
 
+import { IReducerResponse } from '../../interface/Response'
+
 const ErrorCreate = () => {
 
-    const { responseCreate } = useContext(ResponseContext)
+    const { responseCreate } = useContext<IReducerResponse>(ResponseContext)
 
   return (
     <div>

@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useReducer } from 'react'
+import { ReactNode, createContext, useEffect, useReducer } from 'react'
 import { useNavigate } from "react-router-dom";
 
 import { initialResponse } from '../values/response.value';
@@ -9,17 +9,21 @@ import * as userApi from '../api/user.api'
 import { AUTH, LOGOUT } from '../constants/user.const'
 import userReducer from '../reducers/user.reducer'
 import { initialUser } from '../values/user.value'
+import { IReducerUser, IUserLogin, IUserRegister } from '../../interface/User';
+import { IAction } from '../../interface/Reducer';
+import { IReducerResponse } from '../../interface/Response';
+
 import { isStorage } from '../../helper/storage';
 
-export const UserContext = createContext(initialUser)
-export const ResponseContext = createContext(initialResponse)
+export const UserContext = createContext<IReducerUser>(initialUser)
+export const ResponseContext = createContext<IReducerResponse>(initialResponse)
 
-export const UserContextGlobal = ({ children }: any) => {
+export const UserContextGlobal = ({ children }: { children: ReactNode }) => {
 
     const navigate = useNavigate()
 
-    const [state, dispatch] = useReducer(userReducer, initialUser)
-    const [stateR, dispatchR] = useReducer(responseReducer, initialResponse)
+    const [state, dispatch] = useReducer<(state: IReducerUser, action: IAction) => IReducerUser>(userReducer, initialUser)
+    const [stateR, dispatchR] = useReducer<(state: IReducerResponse, action: IAction) => IReducerResponse>(responseReducer, initialResponse)
 
     useEffect(() => {
 
@@ -32,7 +36,7 @@ export const UserContextGlobal = ({ children }: any) => {
         
     }, [])
 
-    const login = async (userData: any) => {
+    const login = async (userData: IUserLogin) => {
 
         try {
 
@@ -54,7 +58,7 @@ export const UserContextGlobal = ({ children }: any) => {
 
     }
 
-    const register = async (userData: any) => {
+    const register = async (userData: IUserRegister) => {
 
         try {
 

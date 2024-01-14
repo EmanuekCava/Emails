@@ -1,5 +1,3 @@
-import React from 'react'
-
 import Auth from './components/auth'
 import Icon from './components/icon'
 

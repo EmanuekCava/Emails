@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useContext } from 'react'
+import { createContext, useReducer, useContext, ReactNode } from 'react'
 
 import { initialResponse } from '../values/response.value'
 import responseReducer from '../reducers/response.reducer'
@@ -10,14 +10,17 @@ import emailReducer from '../reducers/email.reducer'
 import { initialEmail } from '../values/email.value'
 
 import { UserContext } from './user.actions'
+import { IMessageData, IReducerEmail } from '../../interface/Email'
+import { IAction } from '../../interface/Reducer'
+import { IReducerResponse } from '../../interface/Response'
 
-export const EmailContext = createContext(initialEmail)
-export const ResponseContext = createContext(initialResponse)
+export const EmailContext = createContext<IReducerEmail>(initialEmail)
+export const ResponseContext = createContext<IReducerResponse>(initialResponse)
 
-export const EmailContextGlobal = ({ children }: any) => {
+export const EmailContextGlobal = ({ children }: { children: ReactNode }) => {
 
-    const [state, dispatch] = useReducer(emailReducer, initialEmail)
-    const [stateR, dispatchR] = useReducer(responseReducer, initialResponse)
+    const [state, dispatch] = useReducer<(state: IReducerEmail, action: IAction) => IReducerEmail>(emailReducer, initialEmail)
+    const [stateR, dispatchR] = useReducer<(state: IReducerResponse, action: IAction) => IReducerResponse>(responseReducer, initialResponse)
 
     const { user } = useContext(UserContext)
 
@@ -72,7 +75,7 @@ export const EmailContextGlobal = ({ children }: any) => {
 
     }
 
-    const createEmail = async (emailData: any, setIsNewEmail: any, setIsEmailsSent: any) => {
+    const createEmail = async (emailData: IMessageData, setIsNewEmail: (isNewEmail: boolean) => void, setIsEmailsSent: (isEmailsSent: boolean) => void) => {
 
         try {
 
@@ -96,7 +99,7 @@ export const EmailContextGlobal = ({ children }: any) => {
 
     }
 
-    const removeEmail = async (id: string, setIsEmailsSent: any, setIsGetEmail: any) => {
+    const removeEmail = async (id: string, setIsEmailsSent: (isEmailsSent: boolean) => void, setIsGetEmail: (isGetEmail: boolean) => void) => {
 
         try {
 
@@ -118,7 +121,7 @@ export const EmailContextGlobal = ({ children }: any) => {
 
     return (
         <ResponseContext.Provider value={stateR}>
-            <EmailContext.Provider value={{ ...state, emailsObtained, emailsSent, getEmailAction, createEmail, removeEmail }}>
+            <EmailContext.Provider value={{ ...state, emailsObtained, emailsSent, getEmailAction, createEmail, removeEmail } as any}>
                 {children}
             </EmailContext.Provider>
         </ResponseContext.Provider>

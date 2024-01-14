@@ -1,5 +1,3 @@
-import React from 'react'
-
 const ImageFirst = () => {
     return (
         <div className='container-image-index'>

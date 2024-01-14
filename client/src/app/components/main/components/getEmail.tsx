@@ -1,20 +1,24 @@
-import React, { useContext, useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import { BsTrash } from "react-icons/bs";
 
 import { EmailContext } from '../../../server/actions/email.actions'
 import { UserContext } from '../../../server/actions/user.actions'
 
-const GetEmail = ({ idEmail, setIsGetEmail, setIsEmailsSent }: any) => {
+import { IReducerEmail } from '../../../interface/Email';
+import { IReducerUser } from '../../../interface/User';
+import { GetEmailTypeProps } from '../../../types/message.props';
 
-    const { getEmailAction, removeEmail, message } = useContext(EmailContext)
-    const { user } = useContext(UserContext)
+const GetEmail = ({ idEmail, setIsGetEmail, setIsEmailsSent }: GetEmailTypeProps) => {
+
+    const { getEmailAction, removeEmail, message } = useContext<IReducerEmail>(EmailContext)
+    const { user } = useContext<IReducerUser>(UserContext)
 
     useEffect(() => {
-        getEmailAction(idEmail)
+        getEmailAction!(idEmail)
     }, [idEmail])
 
     const deleteEmail = () => {
-        removeEmail(idEmail, setIsEmailsSent, setIsGetEmail)
+        removeEmail!(idEmail, setIsEmailsSent, setIsGetEmail)
     }
 
     return (

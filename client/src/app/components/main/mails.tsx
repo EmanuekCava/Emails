@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import Create from './components/create'
 import GetEmail from './components/getEmail'
 import Mail from './components/mail'
+import { MailsTypeProps } from '../../types/message.props'
 
-const Mails = ({ messagesObtained, messagesSent, isEmailReceived, isNewEmail, isEmailsSent, isGetEmail, setIsEmailReceived, setIsNewEmail, setIsEmailsSent, setIsGetEmail }: any) => {
+const Mails = ({ messagesObtained, messagesSent, isEmailReceived, isNewEmail, isEmailsSent, isGetEmail, setIsEmailReceived, setIsNewEmail, setIsEmailsSent, setIsGetEmail }: MailsTypeProps) => {
 
-  const [idEmail, setIdEmail] = useState("")
-
-  useEffect(() => {
-  }, [isGetEmail, idEmail])
+  const [idEmail, setIdEmail] = useState<string>("")
 
   return (
     <div className='container-mails'>

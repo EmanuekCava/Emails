@@ -1,5 +1,3 @@
-import React from 'react'
-
 const Error = ({ msg }: { msg: string }) => {
     return (
         <div className='container-message'>

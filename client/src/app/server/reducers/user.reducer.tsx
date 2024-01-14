@@ -1,11 +1,11 @@
-import { initialStateUser } from "../../types/auth.props";
-import { action } from "../../types/reducer.props";
+import { IAction } from "../../interface/Reducer";
+import { IReducerUser } from "../../interface/User";
 
 import { AUTH, LOGOUT } from "../constants/user.const";
 
 import { initialUser } from "../values/user.value"
 
-const userReducer = (state: initialStateUser = initialUser, action: action) => {
+const userReducer = (state: IReducerUser = initialUser, action: IAction): IReducerUser | any => {
 
     switch (action.type) {
         case AUTH:

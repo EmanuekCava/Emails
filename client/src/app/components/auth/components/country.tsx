@@ -1,6 +1,6 @@
-import React from 'react'
+import { CountryTypeProps } from "../../../types/auth.props"
 
-const Country = ({ country, handleChange }: { country: string, handleChange: any }) => {
+const Country = ({ country, handleChange }: CountryTypeProps) => {
     return (
         <select className='input-form' name='country' value={country} onChange={handleChange}>
             <option value="" disabled>Select yor country</option>

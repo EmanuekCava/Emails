@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+import { IMessageData } from '../../interface/Email'
+
 const api = axios.create({ baseURL: 'http://localhost:4100' })
 
 export const emailsObtainedApi = async (token: string) => {
@@ -32,7 +34,7 @@ export const getEmailApi = async (id: string, token: string) => {
 
 }
 
-export const createEmailApi = async (messageData: any, token: string) => {
+export const createEmailApi = async (messageData: IMessageData, token: string) => {
 
     return await api.post('/createmessage', messageData, {
         headers: {

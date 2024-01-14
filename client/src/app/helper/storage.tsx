@@ -1,4 +1,4 @@
-export const isStorage = () => {
+export const isStorage = (): boolean => {
     
     const isLoggedIn = JSON.parse(localStorage.getItem('is-auth-data') as string)
 

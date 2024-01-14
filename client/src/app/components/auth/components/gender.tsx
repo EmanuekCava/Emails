@@ -1,6 +1,6 @@
-import React from 'react'
+import { GenderTypeProps } from "../../../types/auth.props"
 
-const Gender = ({ gender, handleChange }: { gender: string, handleChange: any }) => {
+const Gender = ({ gender, handleChange }: GenderTypeProps) => {
     return (
         <select className='input-form' name='gender' value={gender} onChange={handleChange}>
             <option value="" disabled>Select yor gender</option>

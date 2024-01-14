@@ -1,6 +1,6 @@
-import React, { useContext } from 'react'
+import { MailTypeProps } from "../../../types/message.props"
 
-const Mail = ({ email, isEmailReceived, isEmailsSent, setIsGetEmail, setIsNewEmail, setIsEmailReceived, setIsEmailsSent, setIdEmail }: any) => {
+const Mail = ({ email, isEmailReceived, isEmailsSent, setIsGetEmail, setIsNewEmail, setIsEmailReceived, setIsEmailsSent, setIdEmail }: MailTypeProps) => {
 
     const getEmail = () => {
         setIsGetEmail(true)

@@ -1,5 +1,3 @@
-import React from 'react'
-
 import ImageSecond from './components/imageSecond'
 import TextSecond from './components/textSecond'
 

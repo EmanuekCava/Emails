@@ -1,20 +1,23 @@
-import React, { useState, ChangeEvent, FormEvent, useContext } from 'react'
+import { useState, ChangeEvent, FormEvent, useContext } from 'react'
 
 import ErrorCreate from '../../../response/message/errorCreate'
 
 import { EmailContext } from '../../../server/actions/email.actions'
 
-const Create = ({ setIsNewEmail, setIsEmailsSent }: any) => {
+import { IMessageData, IReducerEmail } from '../../../interface/Email'
+import { CreateTypeProps } from '../../../types/message.props'
 
-    const { createEmail } = useContext(EmailContext)
+const Create = ({ setIsNewEmail, setIsEmailsSent }: CreateTypeProps) => {
 
-    const initialState = {
+    const { createEmail } = useContext<IReducerEmail>(EmailContext)
+
+    const initialState: IMessageData = {
         subject: "",
         description: "",
         to: ""
     }
 
-    const [emailData, setEmailData] = useState(initialState)
+    const [emailData, setEmailData] = useState<IMessageData>(initialState)
 
     const { subject, description, to } = emailData
 
@@ -25,7 +28,7 @@ const Create = ({ setIsNewEmail, setIsEmailsSent }: any) => {
 
     const handleSumbit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        createEmail(emailData, setIsNewEmail, setIsEmailsSent)
+        createEmail!(emailData, setIsNewEmail, setIsEmailsSent)
     }
 
     return (

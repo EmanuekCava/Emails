@@ -1,12 +1,14 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 
 import { ResponseContext } from '../../server/actions/user.actions'
 
 import Error from '../component/error'
 
+import { IReducerResponse } from '../../interface/Response'
+
 const ErrorRegister = () => {
 
-    const { responseRegister } = useContext(ResponseContext)
+    const { responseRegister } = useContext<IReducerResponse>(ResponseContext)
 
   return (
     <div>

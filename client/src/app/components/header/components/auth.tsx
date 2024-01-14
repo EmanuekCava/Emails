@@ -1,11 +1,13 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import { Link, useNavigate } from "react-router-dom";
 
 import { UserContext } from '../../../server/actions/user.actions';
 
+import { IReducerUser } from '../../../interface/User';
+
 const Auth = () => {
 
-    const { isLoggedIn, logout } = useContext(UserContext)
+    const { isLoggedIn, logout } = useContext<IReducerUser>(UserContext)
 
     const navigate = useNavigate()
 
@@ -17,7 +19,7 @@ const Auth = () => {
     }
 
     const signOff = () => {
-        logout()
+        logout!()
     }
 
     return (

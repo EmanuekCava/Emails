@@ -1,19 +1,22 @@
-import React, { useState, ChangeEvent, FormEvent, useContext, useEffect } from 'react'
+import { useState, ChangeEvent, FormEvent, useContext, useEffect } from 'react'
 import { Link } from "react-router-dom";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 import Country from './components/country';
 import Gender from './components/gender';
+
 import ErrorRegister from '../../response/message/errorRegister';
+import Error from '../../response/component/error';
 
 import { UserContext } from '../../server/actions/user.actions';
-import Error from '../../response/component/error';
+
+import { IReducerUser, IUserRegister } from '../../interface/User';
 
 const FormRegister = () => {
 
-  const { register } = useContext(UserContext)
+  const { register } = useContext<IReducerUser>(UserContext)
 
-  const initialState = {
+  const initialState: IUserRegister = {
     name: "",
     surname: "",
     email: "",
@@ -24,10 +27,10 @@ const FormRegister = () => {
     confirm: ""
   }
 
-  const [userData, setUserData] = useState(initialState)
-  const [isAccepted, setIsAccepted] = useState(false)
-  const [showAccept, setShowAccept] = useState(false)
-  const [showPass, setShowPass] = useState(false)
+  const [userData, setUserData] = useState<IUserRegister>(initialState)
+  const [isAccepted, setIsAccepted] = useState<boolean>(false)
+  const [showAccept, setShowAccept] = useState<boolean>(false)
+  const [showPass, setShowPass] = useState<boolean>(false)
 
   const { name, surname, email, birth, gender, country, password, confirm } = userData
 
@@ -35,15 +38,11 @@ const FormRegister = () => {
     setShowPass(!showPass)
   }
 
-  useEffect(() => {
-  }, [isAccepted, showAccept])
-
-
   const acceptConditions = () => {
     setIsAccepted(!isAccepted)
   }
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target
     setUserData({ ...userData, [name]: value })
   }
@@ -52,7 +51,7 @@ const FormRegister = () => {
     e.preventDefault()
     if (isAccepted) {
       setShowAccept(false)
-      register(userData)
+      register!(userData)
     } else {
       setShowAccept(true)
     }

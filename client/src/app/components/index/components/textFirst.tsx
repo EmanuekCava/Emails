@@ -1,5 +1,3 @@
-import React from 'react'
-
 const TextFirst = () => {
   return (
     <div className='container-text-index'>

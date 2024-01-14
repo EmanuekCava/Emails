@@ -1,12 +1,10 @@
-import React, { useEffect } from 'react'
 import { AiOutlineMail } from 'react-icons/ai'
 import { MdOutlineAddBox } from "react-icons/md";
 import { RiSendPlane2Line } from "react-icons/ri";
 
-const Actions = ({ setIsEmailReceived, setIsNewEmail, setIsEmailsSent, setIsGetEmail, isEmailReceived, isNewEmail, isEmailsSent }: any) => {
+import { ActionsTypeProps } from '../../types/message.props';
 
-    useEffect(() => {
-    }, [isEmailReceived, isNewEmail, isEmailsSent])
+const Actions = ({ setIsEmailReceived, setIsNewEmail, setIsEmailsSent, setIsGetEmail, isEmailReceived, isNewEmail, isEmailsSent }: ActionsTypeProps) => {
 
     const showEmailsReceived = () => {
         setIsEmailReceived(true)

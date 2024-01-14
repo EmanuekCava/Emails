@@ -1,20 +1,22 @@
-import React, { useState, ChangeEvent, FormEvent, useContext } from 'react'
+import { useState, ChangeEvent, FormEvent, useContext } from 'react'
 import { Link } from 'react-router-dom'
 
 import ErrorLogin from '../../response/message/errorLogin'
 
 import { UserContext } from '../../server/actions/user.actions'
 
+import { IReducerUser, IUserLogin } from '../../interface/User'
+
 const FormLogin = () => {
 
-  const initialState = {
+  const initialState: IUserLogin = {
     email: "",
     password: ""
   }
 
-  const { login } = useContext(UserContext)
+  const { login } = useContext<IReducerUser>(UserContext)
 
-  const [userData, setUserData] = useState(initialState)
+  const [userData, setUserData] = useState<IUserLogin>(initialState)
 
   const { email, password } = userData
 
@@ -25,7 +27,7 @@ const FormLogin = () => {
 
   const handleSumbit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    login(userData)
+    login!(userData)
   }
 
   return (
