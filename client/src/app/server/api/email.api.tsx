@@ -2,7 +2,9 @@ import axios from 'axios'
 
 import { IMessageData } from '../../interface/Email'
 
-const api = axios.create({ baseURL: 'http://localhost:4100' })
+import { host_dev, host_prod } from '../../config/config'
+
+const api = axios.create({ baseURL: !process.env.NODE_ENV || process.env.NODE_ENV === 'development' ? `${host_dev}` : `${host_prod}` })
 
 export const emailsObtainedApi = async (token: string) => {
 

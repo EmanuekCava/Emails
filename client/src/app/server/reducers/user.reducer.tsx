@@ -1,3 +1,4 @@
+import { is_auth_storage, user_storage } from "../../config/config";
 import { IAction } from "../../interface/Reducer";
 import { IReducerUser } from "../../interface/User";
 
@@ -9,8 +10,8 @@ const userReducer = (state: IReducerUser = initialUser, action: IAction): IReduc
 
     switch (action.type) {
         case AUTH:
-            localStorage.setItem("is-auth-data", JSON.stringify("true"))
-            localStorage.setItem("user", JSON.stringify(action.payload))
+            localStorage.setItem(`${is_auth_storage}`, JSON.stringify("true"))
+            localStorage.setItem(`${user_storage}`, JSON.stringify(action.payload))
             return {
                 ...state,
                 user: action.payload,
@@ -18,8 +19,8 @@ const userReducer = (state: IReducerUser = initialUser, action: IAction): IReduc
             }
 
         case LOGOUT:
-            localStorage.removeItem("is-auth-data")
-            localStorage.removeItem("user")
+            localStorage.removeItem(`${is_auth_storage}`)
+            localStorage.removeItem(`${user_storage}`)
             return {
                 ...state,
                 user: {},

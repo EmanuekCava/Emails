@@ -2,7 +2,9 @@ import axios from 'axios'
 
 import { IUserLogin, IUserRegister } from '../../interface/User'
 
-const api = axios.create({ baseURL: 'http://localhost:4100' })
+import { host_dev, host_prod } from '../../config/config'
+
+const api = axios.create({ baseURL: !process.env.NODE_ENV || process.env.NODE_ENV === 'development' ? `${host_dev}` : `${host_prod}` })
 
 export const registerApi = async (userData: IUserRegister) => {
     return await api.post('/register', userData, {
