@@ -41,6 +41,10 @@ export const message = async (req: Request, res: Response): Promise<Response> =>
 
         const message = await Message.findById(id).populate("to", "email").populate("from", "email")
 
+        if(!message) {
+            return res.status(400).json({ message: "Message does not exists" })
+        }
+
         return res.status(200).json(message)
         
     } catch (error) {
@@ -57,16 +61,26 @@ export const createMessage = async (req: Request, res: Response): Promise<Respon
 
         const addressUser: IMessage | any = await user.findOne({ email: to })
 
+        if(!addressUser) {
+            return res.status(400).json({ message: "Address user does not exists" })
+        }
+
         const newMessage = new Message({
             subject,
             description,
-            to: addressUser?._id,
+            to: addressUser._id,
             from: req.user
         })
 
         const messageSaved = await newMessage.save()
 
-        return res.status(200).json(messageSaved)
+        const message = await Message.findById(messageSaved._id).populate("to", "email").populate("from", "email")
+
+        if(!message) {
+            return res.status(400).json({ message: "Message does not exists" })
+        }
+
+        return res.status(200).json(message)
         
     } catch (error) {
         throw error

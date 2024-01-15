@@ -99,7 +99,7 @@ export const UserContextGlobal = ({ children }: { children: ReactNode }) => {
 
     return (
         <ResponseContext.Provider value={stateR}>
-            <UserContext.Provider value={{ ...state, login, register, logout } as any}>
+            <UserContext.Provider value={{ ...state, login, register, logout } as IReducerUser}>
                 {children}
             </UserContext.Provider>
         </ResponseContext.Provider>

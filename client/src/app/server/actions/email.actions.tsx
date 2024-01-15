@@ -5,14 +5,15 @@ import responseReducer from '../reducers/response.reducer'
 import { ERROR_CREATE } from '../constants/response.const'
 
 import * as emailApi from '../api/email.api'
-import { CREATE_MESSAGE, DELETE_MESSAGE, GET_MESSAGE, MESSAGES_OBTAINED, MESSAGES_SENT } from '../constants/email.const'
+import { CREATE_MESSAGE, DELETE_MESSAGE, GET_MESSAGE, MESSAGES_OBTAINED, MESSAGES_SENT, REVEICE_MESSAGE } from '../constants/email.const'
 import emailReducer from '../reducers/email.reducer'
 import { initialEmail } from '../values/email.value'
 
 import { UserContext } from './user.actions'
-import { IMessageData, IReducerEmail } from '../../interface/Email'
+import { IMessage, IMessageData, IReducerEmail } from '../../interface/Email'
 import { IAction } from '../../interface/Reducer'
 import { IReducerResponse } from '../../interface/Response'
+import { socket } from '../socket/socket'
 
 export const EmailContext = createContext<IReducerEmail>(initialEmail)
 export const ResponseContext = createContext<IReducerResponse>(initialResponse)
@@ -28,7 +29,7 @@ export const EmailContextGlobal = ({ children }: { children: ReactNode }) => {
 
         try {
 
-            const { data } = await emailApi.emailsObtainedApi(user.token)
+            const { data } = await emailApi.emailsObtainedApi(user.token!)
 
             dispatch({
                 type: MESSAGES_OBTAINED,
@@ -45,7 +46,7 @@ export const EmailContextGlobal = ({ children }: { children: ReactNode }) => {
 
         try {
 
-            const { data } = await emailApi.emailsSentApi(user.token)
+            const { data } = await emailApi.emailsSentApi(user.token!)
 
             dispatch({
                 type: MESSAGES_SENT,
@@ -62,7 +63,7 @@ export const EmailContextGlobal = ({ children }: { children: ReactNode }) => {
 
         try {
 
-            const { data } = await emailApi.getEmailApi(id, user.token)
+            const { data } = await emailApi.getEmailApi(id, user.token!)
 
             dispatch({
                 type: GET_MESSAGE,
@@ -79,7 +80,7 @@ export const EmailContextGlobal = ({ children }: { children: ReactNode }) => {
 
         try {
 
-            const { data } = await emailApi.createEmailApi(emailData, user.token)
+            const { data } = await emailApi.createEmailApi(emailData, user.token!)
 
             dispatch({
                 type: CREATE_MESSAGE,
@@ -87,8 +88,9 @@ export const EmailContextGlobal = ({ children }: { children: ReactNode }) => {
             })
 
             setIsNewEmail(false)
-            emailsSent()
             setIsEmailsSent(true)
+
+            socket.emit("emailSent", data)
 
         } catch (error: any) {
             dispatchR({
@@ -103,7 +105,7 @@ export const EmailContextGlobal = ({ children }: { children: ReactNode }) => {
 
         try {
 
-            await emailApi.removeEmailApi(id, user.token)
+            await emailApi.removeEmailApi(id, user.token!)
 
             dispatch({
                 type: DELETE_MESSAGE,
@@ -119,9 +121,24 @@ export const EmailContextGlobal = ({ children }: { children: ReactNode }) => {
 
     }
 
+    const receiveEmail = async (data: IMessage) => {
+
+        try {
+
+            dispatch({
+                type: REVEICE_MESSAGE,
+                payload: data
+            })
+            
+        } catch (error) {
+            throw error
+        }
+
+    }
+
     return (
         <ResponseContext.Provider value={stateR}>
-            <EmailContext.Provider value={{ ...state, emailsObtained, emailsSent, getEmailAction, createEmail, removeEmail } as any}>
+            <EmailContext.Provider value={{ ...state, emailsObtained, emailsSent, getEmailAction, createEmail, removeEmail, receiveEmail } as IReducerEmail}>
                 {children}
             </EmailContext.Provider>
         </ResponseContext.Provider>

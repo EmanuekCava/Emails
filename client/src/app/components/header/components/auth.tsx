@@ -5,9 +5,11 @@ import { UserContext } from '../../../server/actions/user.actions';
 
 import { IReducerUser } from '../../../interface/User';
 
+import { isStorage } from '../../../helper/storage';
+
 const Auth = () => {
 
-    const { isLoggedIn, logout } = useContext<IReducerUser>(UserContext)
+    const { logout } = useContext<IReducerUser>(UserContext)
 
     const navigate = useNavigate()
 
@@ -27,7 +29,7 @@ const Auth = () => {
             <Link to="/" relative='path' className='text-auth-header letnoselect'>Help</Link>
             <Link to="/" relative='path' className='text-auth-header letnoselect'>About us</Link>
             {
-                isLoggedIn ? (
+                isStorage() ? (
                     <p className='text-auth-header letnoselect' style={{ color: '#c43' }} onClick={signOff}> Sign off</p>
                 ) : (
                     <>

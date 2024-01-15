@@ -6,13 +6,14 @@ import Mails from '../components/main/mails'
 import { EmailContext } from '../server/actions/email.actions'
 import { UserContext } from '../server/actions/user.actions'
 
-import { IReducerEmail } from '../interface/Email'
+import { IMessage, IReducerEmail } from '../interface/Email'
 import { IReducerUser } from '../interface/User'
+import { socket } from '../server/socket/socket'
 
 const Main = () => {
 
-  const { emailsObtained, emailsSent, messagesObtained, messagesSent } = useContext<IReducerEmail>(EmailContext)
-  const { isLoggedIn } = useContext<IReducerUser>(UserContext)
+  const { emailsObtained, emailsSent, messagesObtained, messagesSent, receiveEmail } = useContext<IReducerEmail>(EmailContext)
+  const { isLoggedIn, user } = useContext<IReducerUser>(UserContext)
 
   const [isEmailReceived, setIsEmailReceived] = useState<boolean>(true)
   const [isNewEmail, setIsNewEmail] = useState<boolean>(false)
@@ -25,6 +26,15 @@ const Main = () => {
       emailsSent!()
     }
   }, [isLoggedIn])
+
+  useEffect(() => {
+    socket.on("messages", (data: IMessage) => {
+      if (data.to?._id === user.user?._id) {
+        receiveEmail!(data)
+      }
+    })
+  }, [])
+
 
   return (
     <div className='container-main'>

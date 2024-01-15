@@ -18,7 +18,7 @@ const userReducer = (state: IReducerUser = initialUser, action: IAction): IReduc
             }
 
         case LOGOUT:
-            localStorage.setItem("is-auth-data", JSON.stringify("false"))
+            localStorage.removeItem("is-auth-data")
             localStorage.removeItem("user")
             return {
                 ...state,

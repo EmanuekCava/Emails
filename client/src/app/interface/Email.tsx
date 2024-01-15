@@ -1,18 +1,25 @@
+import { IUser } from "./User";
+
 export interface IReducerEmail {
-    messagesObtained: any[];
+    messagesObtained: IMessage[];
     emailsObtained?: () => void;
     emailsSent?: () => void;
     getEmailAction?: (id: string) => void;
-    createEmail?: (emailData: any, setIsNewEmail: (isNewEmail: boolean) => void, setIsEmailsSent: (isEmailSent: boolean) => void) => void;
+    createEmail?: (emailData: IMessageData, setIsNewEmail: (isNewEmail: boolean) => void, setIsEmailsSent: (isEmailSent: boolean) => void) => void;
     removeEmail?: (id: string, setIsEmailsSent: (isEmailsSent: boolean) => void, setIsGetEmail: (isGetEmail: boolean) => void) => void;
-    messagesSent: any[];
-    message: any;
+    receiveEmail?: (data: IMessage) => void;
+    messagesSent: IMessage[];
+    message: IMessage;
 }
 
 export interface IMessage {
-    _id: string;
-    createdAt: string;
-    updatedAt: string;
+    _id?: string;
+    subject?: string;
+    description?: string;
+    to?: IUser;
+    from?: IUser;
+    createdAt?: string;
+    updatedAt?: string;
 }
 
 export interface IMessageData {

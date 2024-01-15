@@ -27,7 +27,7 @@ const GetEmail = ({ idEmail, setIsGetEmail, setIsEmailsSent }: GetEmailTypeProps
                 <p className='subject-getemail'>{message.subject}</p>
                 <div className='container-info-getemail'>
                     {
-                        message.from?._id === user.user._id && <BsTrash className='trash-icon letnoselect' onClick={deleteEmail} />
+                        message.from?._id === user.user!._id && <BsTrash className='trash-icon letnoselect' onClick={deleteEmail} />
                     }
                     <p><u>From</u>: {message.from?.email}</p>
                     <p><u>To</u>: {message.to?.email}</p>

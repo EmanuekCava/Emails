@@ -1,8 +1,8 @@
-import { CREATE_MESSAGE, DELETE_MESSAGE, GET_MESSAGE, MESSAGES_OBTAINED, MESSAGES_SENT } from "../constants/email.const";
+import { CREATE_MESSAGE, DELETE_MESSAGE, GET_MESSAGE, MESSAGES_OBTAINED, MESSAGES_SENT, REVEICE_MESSAGE } from "../constants/email.const";
 
 import { initialEmail } from "../values/email.value"
 
-import { IReducerEmail } from "../../interface/Email";
+import { IMessage, IReducerEmail } from "../../interface/Email";
 import { IAction } from "../../interface/Reducer";
 
 const emailReducer = (state: IReducerEmail = initialEmail, action: IAction): IReducerEmail | any => {
@@ -34,7 +34,13 @@ const emailReducer = (state: IReducerEmail = initialEmail, action: IAction): IRe
         case DELETE_MESSAGE:
             return {
                 ...state,
-                messagesSent: state.messagesSent.filter((msg: any) => msg._id !== action.payload)
+                messagesSent: state.messagesSent.filter((msg: IMessage) => msg._id !== action.payload)
+            }
+
+        case REVEICE_MESSAGE:
+            return {
+                ...state,
+                messagesObtained: [...state.messagesObtained, action.payload]
             }
 
         default:

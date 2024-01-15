@@ -3,7 +3,9 @@ import { useState } from 'react'
 import Create from './components/create'
 import GetEmail from './components/getEmail'
 import Mail from './components/mail'
+
 import { MailsTypeProps } from '../../types/message.props'
+import { IMessage } from '../../interface/Email'
 
 const Mails = ({ messagesObtained, messagesSent, isEmailReceived, isNewEmail, isEmailsSent, isGetEmail, setIsEmailReceived, setIsNewEmail, setIsEmailsSent, setIsGetEmail }: MailsTypeProps) => {
 
@@ -15,7 +17,7 @@ const Mails = ({ messagesObtained, messagesSent, isEmailReceived, isNewEmail, is
         <>
           {
             isEmailReceived &&
-            messagesObtained.map((email: any) => {
+            messagesObtained.map((email: IMessage) => {
               return <Mail email={email} isEmailReceived={isEmailReceived} isEmailsSent={isEmailsSent}
                 setIsGetEmail={setIsGetEmail} setIsNewEmail={setIsNewEmail} setIsEmailReceived={setIsEmailReceived} setIsEmailsSent={setIsEmailsSent} setIdEmail={setIdEmail} key={email._id} />
             })
@@ -26,7 +28,7 @@ const Mails = ({ messagesObtained, messagesSent, isEmailReceived, isNewEmail, is
         <>
           {
             isEmailsSent &&
-            messagesSent.map((email: any) => {
+            messagesSent.map((email: IMessage) => {
               return <Mail email={email} isEmailReceived={isEmailReceived} isEmailsSent={isEmailsSent}
                 setIsGetEmail={setIsGetEmail} setIsNewEmail={setIsNewEmail} setIsEmailReceived={setIsEmailReceived} setIsEmailsSent={setIsEmailsSent} setIdEmail={setIdEmail} key={email._id} />
             })
