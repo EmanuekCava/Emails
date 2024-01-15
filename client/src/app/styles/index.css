@@ -10,8 +10,10 @@
 
 .container-info-index {
     width: 100%;
-    display: inline-flex;
+    display: flex;
     height: 100vh;
+    justify-content: center;
+    align-items: center;
 }
 
 /* IMAGE */
@@ -51,4 +53,13 @@
 }
 .description-text {
     font-size: 25px;
+}
+
+@media screen and (max-width: 1195px) {
+    .container-info-index {
+        flex-direction: column;
+    }
+    .image-index {
+        display: none;
+    }
 }

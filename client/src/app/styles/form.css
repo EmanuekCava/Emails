@@ -86,3 +86,21 @@
     font-size: 22px;
     cursor: pointer;
 }
+
+@media screen and (max-width: 840px) {
+    .container-form {
+        width: 87% !important;
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    .container-horizontally {
+        display: block;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .show-pass-icon {
+        left: 87%;
+    }
+}
